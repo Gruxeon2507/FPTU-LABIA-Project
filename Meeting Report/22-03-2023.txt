@@ -1,0 +1,22 @@
+- Cài netbean với ubuntu: (22-23/2);
+- Sản phẩm: tính năng xe, quản lí điểm
+	+Giáo viên (admin)
+	+Sinh viên
+- Việc cần làm:
+	+ Công nghệ: Spring mvc, GitHub
+	+ Thiết kế DB: (8h 23/03/2023)
+		+User
+		+student
+		+Course
+		+Instructor
+		+Grade
+	+ Làm mockup page:
+		Chung: 
+			-login
+			-logout
+		Giảng viên:
+			-Add + Update điểm (View danh sách + sửa điểm)
+			-Xem danh sách lớp
+		Sinh viên:
+			-View điểm
+			-Hiện môn học(Theo Kỳ, Từng môn)
