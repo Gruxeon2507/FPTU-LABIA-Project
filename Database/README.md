@@ -1,1 +1,2 @@
 -diagram link : https://drive.google.com/file/d/1lYDXW6e267ubW5IlvbVoVRiJsIB3DTyA/view?usp=sharing
+-Run CreateDatabase -> InsertAutithencationData -> InsertGradeData
