@@ -4,6 +4,7 @@
  */
 package com.examplecrud.demojsp.repository;
 
+import com.examplecrud.demojsp.model.gradeModel.GradeCategory;
 import com.examplecrud.demojsp.model.gradeModel.Student;
 import org.springframework.data.jpa.repository.Query;
 
@@ -12,5 +13,7 @@ import org.springframework.data.jpa.repository.Query;
  * @author kmd
  */
 public class StudentRepositoryIpm {
+
+    
 
 }

@@ -4,8 +4,13 @@
  */
 package com.examplecrud.demojsp.controller;
 
+import com.examplecrud.demojsp.model.gradeModel.Grade;
+import com.examplecrud.demojsp.model.gradeModel.GradeCategory;
 import com.examplecrud.demojsp.model.gradeModel.Student;
+import com.examplecrud.demojsp.repository.GradeRepository;
 import com.examplecrud.demojsp.repository.StudentRepository;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,15 +24,40 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(path = "student")
 public class StudentController {
+
     @Autowired
     private StudentRepository studentRepository;
-            
-    @RequestMapping(value = "list",method = RequestMethod.GET)
-    public String getAllStudent(ModelMap modelMap){
+
+    @Autowired
+    private GradeRepository gradeRepository;
+
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public String getAllStudent(ModelMap modelMap) {
 
         Iterable<Student> students = studentRepository.findAll();
-        
-        modelMap.addAttribute("students",students);
+
+        modelMap.addAttribute("students", students);
         return "studentList";
+    }
+
+//    @RequestMapping(value = "gradeReport", method = RequestMethod.GET)
+//    public String getGrade(ModelMap modelMap) {
+//
+////        Optional<Student> students = studentRepository.findById("HE170996");
+////        Student student = students.orElse(new Student("defaultName", 0));
+////        modelMap.addAttribute("students", student);
+//        List<Student> students = studentRepository.getStudentGrade("HE170996","PRJ301","SP2023");
+//        modelMap.addAttribute("students", students);
+//        return "studentList";
+//    }
+    @RequestMapping(value = "gradeReport", method = RequestMethod.GET)
+    public String getGrade1(ModelMap modelMap) {
+
+//        Optional<Student> students = studentRepository.findById("HE170996");
+//        Student student = students.orElse(new Student("defaultName", 0));
+//        modelMap.addAttribute("students", student);
+        List<Grade> grades = gradeRepository.getStudentGrade("HE170996","SP2023","PRJ301");
+        modelMap.addAttribute("grades", grades);
+        return "gradeList";
     }
 }

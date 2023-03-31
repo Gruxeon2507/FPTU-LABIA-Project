@@ -21,21 +21,20 @@
                 <th></th>
             </tr>
             <c:forEach items="${students}" var="s" varStatus="index">
-                <c:forEach items="${s.account.account_Role}" var="ss" >
-                <c:forEach items="${ss.role.role_Feature}" var="sss" >
+                 <c:forEach items="${s.grade}" var="ss">
                     <tr>
-                    <th>${index.index+1}</th>
-                    <th>${s.studentId}</th>
-                    <th>${s.studentName}</th>
-                    <th>${s.curriculum.curriculumName}</th>
-                    <th>${sss.feature.featureId}</th>
-                    <th>${sss.feature.featureName}</th>
-                    <th>${sss.feature.url}</th>
-                    
+                        <th>${index.index}</th>
+                        <th>${s.studentId}</th>
+                    <th>${ss.semester.semesterId}</th>
+                    <th>${ss.gradeCategory.course.courseId}</th>
+                    <th>${ss.gradeCategory.course.courseName}</th>
+                    <th>${ss.gradeCategory.gradeCategoryName}</th>
+                    <th>${ss.gradeCategory.gradeItemName}</th>
+                    <th>${ss.gradeCategory.weight}</th>
+                    <th>${ss.gradeValue}</th>
                     
                 </tr>
-                </c:forEach> 
-                </c:forEach> 
+                            </c:forEach> 
             </c:forEach> 
         </table>
     </body>
