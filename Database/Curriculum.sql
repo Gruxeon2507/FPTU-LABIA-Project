@@ -1,1 +1,0 @@
-INSERT INTO Curriculum VALUES ('SE','Software Engineer');
