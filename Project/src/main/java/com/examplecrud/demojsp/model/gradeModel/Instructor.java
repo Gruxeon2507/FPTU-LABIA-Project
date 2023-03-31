@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -34,9 +35,9 @@ public class Instructor {
     List<Group> group;
 
     @OneToOne
-    @MapsId
-    @JoinColumn(name = "username")
-    Account account;
+    @JoinColumn(name="username")
+    private Account account;
+    
 
     public Account getAccount() {
         return account;

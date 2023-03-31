@@ -31,7 +31,6 @@ public class Student {
     private String studentId;
     @Column
     private String studentName;
-    private String accountId;
 
     @ManyToOne
     @JoinColumn(name = "curriculumId")
@@ -44,9 +43,9 @@ public class Student {
     List<Grade> grade;
 
     @OneToOne
+    @JoinColumn(name="username")
+    private Account account;
     
-    @JoinColumn(name = "username")
-    Account account;
 
     public Account getAccount() {
         return account;
@@ -72,13 +71,7 @@ public class Student {
         this.participate = participate;
     }
 
-    public String getAccountId() {
-        return accountId;
-    }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
 
     public Curriculum getCurriculum() {
         return curriculum;

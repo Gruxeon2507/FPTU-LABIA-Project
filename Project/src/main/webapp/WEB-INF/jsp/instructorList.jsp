@@ -18,14 +18,13 @@
                 <th>UserId</th>
             </tr>
             <c:forEach items="${instructors}" var="s" varStatus="index">
-                <c:forEach items="${s.group}" var="ss">
                 <tr>
-                    <th>${index.index+1}</th>
+                <th>${index.index+1}</th>
                 <th>${s.instructorId}</th>
                 <th>${s.instructorName}</th>
-                <th>${s.account.username}</th>
+                <th>${s.account.password}</th>
                 </tr>
-                </c:forEach> 
+        
             </c:forEach> 
         </table>
     </body>

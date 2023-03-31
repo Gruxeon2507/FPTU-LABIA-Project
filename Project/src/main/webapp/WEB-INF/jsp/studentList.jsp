@@ -18,21 +18,23 @@
                 <th>CurriculumName</th>
                 <th>GroupName</th>
                 <th>CourseId</th>
+                <th></th>
             </tr>
             <c:forEach items="${students}" var="s" varStatus="index">
-                <c:forEach items="${s.grade}" var="ss" >
-                <tr>
+                <c:forEach items="${s.account.account_Role}" var="ss" >
+                <c:forEach items="${ss.role.role_Feature}" var="sss" >
+                    <tr>
                     <th>${index.index+1}</th>
                     <th>${s.studentId}</th>
                     <th>${s.studentName}</th>
                     <th>${s.curriculum.curriculumName}</th>
-                    <th>${ss.gradeCategory.gradeCategoryName}</th>
-                    <th>${ss.gradeCategory.gradeItemName}</th>
-                    <th>${ss.gradeCategory.course.courseName}</th>
-                    <th>${ss.gradeCategory.weight}</th>
-                    <th>${ss.gradeValue}</th>
+                    <th>${sss.feature.featureId}</th>
+                    <th>${sss.feature.featureName}</th>
+                    <th>${sss.feature.url}</th>
+                    
                     
                 </tr>
+                </c:forEach> 
                 </c:forEach> 
             </c:forEach> 
         </table>
