@@ -31,6 +31,16 @@ public class Curriculum_Course {
     @MapsId("curriculumId")
     @JoinColumn(name="curriculumId")
     Curriculum curriculum;
+
+    public Curriculum_Course() {
+    }
+
+    
+    public Curriculum_Course(Curriculum_CourseKey id, Course course, Curriculum curriculum) {
+        this.id = id;
+        this.course = course;
+        this.curriculum = curriculum;
+    }
     
     
 

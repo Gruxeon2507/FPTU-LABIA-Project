@@ -37,6 +37,18 @@ public class Instructor {
     @OneToOne
     @JoinColumn(name="username")
     private Account account;
+
+    public Instructor() {
+    }
+
+    
+    public Instructor(String instructorId, String instructorName, List<Group> group, Account account) {
+        this.instructorId = instructorId;
+        this.instructorName = instructorName;
+        this.group = group;
+        this.account = account;
+    }
+    
     
 
     public Account getAccount() {

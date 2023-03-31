@@ -39,10 +39,21 @@ public class Account {
     @OneToMany(mappedBy = "account")
     List<Account_Role> account_Role;
 
+    public Account() {
+    }
+
+    public Account(String username, String password, Student student, Instructor instructor, List<Account_Role> account_Role) {
+        this.username = username;
+        this.password = password;
+        this.student = student;
+        this.instructor = instructor;
+        this.account_Role = account_Role;
+    }
+    
     public List<Account_Role> getAccount_Role() {
         return account_Role;
     }
-
+    
     public void setAccount_Role(List<Account_Role> account_Role) {
         this.account_Role = account_Role;
     }

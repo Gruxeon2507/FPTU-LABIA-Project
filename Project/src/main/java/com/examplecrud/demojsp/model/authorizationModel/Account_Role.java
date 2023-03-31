@@ -34,6 +34,15 @@ public class Account_Role {
     @JoinColumn(name = "roleId")
     Role role;
 
+    public Account_Role() {
+    }
+
+    public Account_Role(AccountRoleKey id, Account account, Role role) {
+        this.id = id;
+        this.account = account;
+        this.role = role;
+    }
+
     public AccountRoleKey getId() {
         return id;
     }

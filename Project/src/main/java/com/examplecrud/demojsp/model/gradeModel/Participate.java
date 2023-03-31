@@ -33,6 +33,17 @@ public class Participate {
     @JoinColumn(name = "studentId")
     Student student;
 
+    public Participate() {
+    }
+
+    
+    public Participate(ParticipateKey id, Group group, Student student) {
+        this.id = id;
+        this.group = group;
+        this.student = student;
+    }
+
+    
     public ParticipateKey getId() {
         return id;
     }

@@ -33,6 +33,20 @@ public class Semester {
     @OneToMany(mappedBy = "semester")
     List<Grade> grade;
 
+    public Semester() {
+    }
+
+    
+    public Semester(String semesterId, String semesterName, int year, Date startDate, Date endDate, List<Grade> grade) {
+        this.semesterId = semesterId;
+        this.semesterName = semesterName;
+        this.year = year;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.grade = grade;
+    }
+
+    
     public List<Grade> getGrade() {
         return grade;
     }

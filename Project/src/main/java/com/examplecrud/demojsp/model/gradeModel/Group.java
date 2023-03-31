@@ -39,6 +39,18 @@ public class Group {
     @OneToMany(mappedBy = "group")
     List<Participate> participate;
 
+    public Group() {
+    }
+
+    public Group(int groupId, String groupName, Instructor instructor, Course course, List<Participate> participate) {
+        this.groupId = groupId;
+        this.groupName = groupName;
+        this.instructor = instructor;
+        this.course = course;
+        this.participate = participate;
+    }
+
+    
     public List<Participate> getParticipate() {
         return participate;
     }

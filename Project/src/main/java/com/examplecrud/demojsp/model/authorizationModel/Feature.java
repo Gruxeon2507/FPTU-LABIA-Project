@@ -28,6 +28,16 @@ public class Feature {
     @OneToMany(mappedBy = "feature")
     List<Role_Feature> role_Feature;
 
+    public Feature() {
+    }
+
+    public Feature(int featureId, String featureName, String url, List<Role_Feature> role_Feature) {
+        this.featureId = featureId;
+        this.featureName = featureName;
+        this.url = url;
+        this.role_Feature = role_Feature;
+    }
+
     public List<Role_Feature> getRole_Feature() {
         return role_Feature;
     }

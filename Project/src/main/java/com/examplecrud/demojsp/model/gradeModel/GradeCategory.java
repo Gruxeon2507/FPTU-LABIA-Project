@@ -37,6 +37,20 @@ public class GradeCategory {
     @OneToMany(mappedBy = "gradeCategory")
     List<Grade> grade;
 
+    public GradeCategory() {
+    }
+
+    
+    public GradeCategory(int gradeCategoryId, String gradeCategoryName, String gradeItemName, float weight, Course course, List<Grade> grade) {
+        this.gradeCategoryId = gradeCategoryId;
+        this.gradeCategoryName = gradeCategoryName;
+        this.gradeItemName = gradeItemName;
+        this.weight = weight;
+        this.course = course;
+        this.grade = grade;
+    }
+
+    
     public List<Grade> getGrade() {
         return grade;
     }

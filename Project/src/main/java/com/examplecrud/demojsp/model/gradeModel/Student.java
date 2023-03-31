@@ -45,6 +45,18 @@ public class Student {
     @OneToOne
     @JoinColumn(name="username")
     private Account account;
+
+    public Student() {
+    }
+
+    public Student(String studentId, String studentName, Curriculum curriculum, List<Participate> participate, List<Grade> grade, Account account) {
+        this.studentId = studentId;
+        this.studentName = studentName;
+        this.curriculum = curriculum;
+        this.participate = participate;
+        this.grade = grade;
+        this.account = account;
+    }
     
 
     public Account getAccount() {
@@ -81,7 +93,7 @@ public class Student {
         this.curriculum = curriculum;
     }
 
-    public Student() {
+    public Student(String defaultName, int par) {
 
     }
 

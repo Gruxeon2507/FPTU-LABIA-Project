@@ -32,6 +32,17 @@ public class Role_Feature {
     @JoinColumn(name = "roleId")
     Role role;
 
+    public Role_Feature() {
+    }
+
+    
+    public Role_Feature(Role_FeatureKey id, Feature feature, Role role) {
+        this.id = id;
+        this.feature = feature;
+        this.role = role;
+    }
+    
+    
     public Role_FeatureKey getId() {
         return id;
     }

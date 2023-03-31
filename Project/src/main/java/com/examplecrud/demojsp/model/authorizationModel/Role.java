@@ -29,6 +29,16 @@ public class Role {
     @OneToMany(mappedBy = "role")
     List<Role_Feature> role_Feature;
 
+    public Role() {
+    }
+
+    public Role(int roleId, String roleName, List<Account_Role> account_Role, List<Role_Feature> role_Feature) {
+        this.roleId = roleId;
+        this.roleName = roleName;
+        this.account_Role = account_Role;
+        this.role_Feature = role_Feature;
+    }
+
     public List<Account_Role> getAccount_Role() {
         return account_Role;
     }

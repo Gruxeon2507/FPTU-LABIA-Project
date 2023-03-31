@@ -41,6 +41,19 @@ public class Grade {
     @JoinColumn(name="studentId")
     Student student;
 
+    public Grade() {
+    }
+
+    
+    public Grade(GradeKey id, float gradeValue, GradeCategory gradeCategory, Semester semester, Student student) {
+        this.id = id;
+        this.gradeValue = gradeValue;
+        this.gradeCategory = gradeCategory;
+        this.semester = semester;
+        this.student = student;
+    }
+
+    
     public GradeKey getId() {
         return id;
     }

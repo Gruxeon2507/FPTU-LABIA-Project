@@ -34,6 +34,19 @@ public class Course {
     @OneToMany(mappedBy = "course")
     List<GradeCategory> gradeCategory;
 
+    public Course() {
+    }
+
+    
+    public Course(String courseId, String courseName, List<Curriculum_Course> curriculum_Courses, List<Group> group, List<GradeCategory> gradeCategory) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.curriculum_Courses = curriculum_Courses;
+        this.group = group;
+        this.gradeCategory = gradeCategory;
+    }
+
+    
     public List<GradeCategory> getGradeCategory() {
         return gradeCategory;
     }

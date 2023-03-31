@@ -37,6 +37,18 @@ public class Curriculum {
     @OneToMany(mappedBy = "curriculum")
     List<Student> student;
 
+    public Curriculum() {
+    }
+
+    
+    public Curriculum(String curriculumId, String curriculumName, List<Curriculum_Course> curriculum_Courses, List<Student> student) {
+        this.curriculumId = curriculumId;
+        this.curriculumName = curriculumName;
+        this.curriculum_Courses = curriculum_Courses;
+        this.student = student;
+    }
+
+    
     public List<Student> getStudent() {
         return student;
     }
