@@ -49,8 +49,8 @@ REFERENCES Feature(featureId);
 	instructorId varchar(20) NOT NULL,
 	instructorName nvarchar(100),
 	CONSTRAINT PK_Instructor PRIMARY KEY (instructorId),
-	accountId varchar(150) NOT NULL UNIQUE,
-    CONSTRAINT FK_Instructor_Account FOREIGN KEY (accountId) REFERENCES Account(username)
+	username varchar(150) NOT NULL UNIQUE,
+    CONSTRAINT FK_Instructor_Account FOREIGN KEY (username) REFERENCES Account(username)
 );
 
 
@@ -86,12 +86,13 @@ CREATE TABLE Student
 	studentId varchar(8) NOT NULL,
 	studentName nvarchar(100),
 	CONSTRAINT PK_Student PRIMARY KEY (studentId),
-	accountId varchar(150) NOT NULL UNIQUE,
+	username varchar(150) NOT NULL UNIQUE,
 	curriculumId varchar(50) DEFAULT 'SE',
-    CONSTRAINT FK_Student_Account FOREIGN KEY (accountId) REFERENCES Account(username)
+    CONSTRAINT FK_Student_Account FOREIGN KEY (username) REFERENCES Account(username)
  );
 ALTER TABLE Student ADD CONSTRAINT FK_Student_Curriculum FOREIGN KEY(curriculumId)
 REFERENCES Curriculum (curriculumId);
+
 
 
 CREATE TABLE `Group`
