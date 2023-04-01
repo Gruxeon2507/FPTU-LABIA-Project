@@ -13,14 +13,24 @@ import javax.persistence.Embeddable;
  * @author kmd
  */
 @Embeddable
-public class GradeKey implements Serializable{
+public class GradeKey implements Serializable {
+
     @Column(name = "gradeCategoryId")
     int gradeCategoryId;
 
     @Column(name = "studentId")
     String studentId;
-    
+
     @Column(name = "semesterId")
     String semesterId;
-    
+
+    public GradeKey() {
+    }
+
+    public GradeKey(int gradeCategoryId, String studentId, String semesterId) {
+        this.gradeCategoryId = gradeCategoryId;
+        this.studentId = studentId;
+        this.semesterId = semesterId;
+    }
+
 }

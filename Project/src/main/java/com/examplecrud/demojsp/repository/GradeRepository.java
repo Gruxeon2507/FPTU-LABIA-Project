@@ -5,6 +5,7 @@
 package com.examplecrud.demojsp.repository;
 
 import com.examplecrud.demojsp.model.gradeModel.Grade;
+import com.examplecrud.demojsp.model.gradeModel.GradeCategory;
 import com.examplecrud.demojsp.modelkey.GradeKey;
 import java.util.List;
 import javax.persistence.Embeddable;
@@ -26,4 +27,5 @@ public interface GradeRepository extends CrudRepository<Grade, GradeKey> {
             + "	where s.studentId = ?1 and sem.semesterId= ?2 and c.courseId= ?3", nativeQuery = true)
     public List<Grade> getStudentGrade(String studentId, String semesterId, String courseId);
 
+    
 }
