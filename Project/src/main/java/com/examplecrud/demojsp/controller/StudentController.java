@@ -48,7 +48,7 @@ public class StudentController {
 
     @Autowired
     private SemesterRepository semesterRepository;
-    
+
     @Autowired
     private CourseRepository courseRepository;
 
@@ -97,8 +97,12 @@ public class StudentController {
     }
 
     @RequestMapping(value = "curriculumReport", method = RequestMethod.GET)
-    public String getCurriculum(ModelMap modelMap) {
-        List<Curriculum> curriculums = curriculumReposity.getStudentCurriculumGrade("HE170907");
+    public String getCurriculum(ModelMap modelMap, HttpSession session) {
+        Account account = (Account) session.getAttribute("account");
+        if (account == null) {
+            return "../authorization/login";
+        }
+        List<Curriculum> curriculums = curriculumReposity.getStudentCurriculumGrade(account.getStudent().getStudentId());
         modelMap.addAttribute("curriculums", curriculums);
         return "studentCurriculum";
 

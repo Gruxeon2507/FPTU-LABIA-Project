@@ -25,5 +25,21 @@ public interface StudentRepository extends CrudRepository<Student, String> {
             + "JOIN gc.course c \n"
             + "JOIN g.semester sem \n"
             + "WHERE s.studentId = ?1 AND c.courseId= ?2 AND sem.semesterId = ?3")
-    public List<Student> getStudentGrade(String studentId, String courseId,String semesterId);
+    public List<Student> getStudentGrade(String studentId, String courseId, String semesterId);
+
+    @Query(value = "select * from student s\n"
+            + "inner join participate p on s.studentId = p.studentId\n"
+            + "inner join `group` g on g.groupId = p.groupId\n"
+            + "inner join instructor i on g.instructorId = i.instructorId\n"
+            + "where i.instructorId= ?1 and g.groupId = ?2", nativeQuery = true)
+    public List<Student> getStudentByGroup(String instructorId, int groupId);
+
+    @Query(value = "select distinct * from student s\n"
+            + "inner join participate p on s.studentId = p.studentId\n"
+            + "inner join `group` g on g.groupId = p.groupId\n"
+            + "inner join instructor i on g.instructorId = i.instructorId\n"
+            + "left join grade gr on gr.studentId = s.studentId \n"
+            + "where i.instructorId= ?1 and g.groupId = ?2 and gr.gradeCategoryId = ?3\n",nativeQuery = true)
+    public List<Student> getStudentByInAndGroupAndGc(String instructorId,int groupId,int gradeCategoryId);
+
 }
