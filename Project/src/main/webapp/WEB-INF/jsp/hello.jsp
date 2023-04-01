@@ -16,5 +16,6 @@
         </head>
         <body>
             <h1>test test test</h1>
+            <p>${sessionScope.account.username}</p>
         </body>
     </html>
