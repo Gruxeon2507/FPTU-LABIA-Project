@@ -12,6 +12,21 @@
     </head>
     <body>
         <h1>Name = ${name} Age=${age}</h1>
+
+        <ul>
+            <c:forEach items="${semesters}" var="s" varStatus="index">
+                <li> <a href="gradeReport?semesterId=${s.semesterId}">${s.semesterName}</a></li>
+                </c:forEach> 
+        </ul>
+        <%
+  String semesterId = request.getParameter("semesterId");
+        %>
+        <ul>
+            <c:forEach items="${courses}" var="c" varStatus="index">
+                <li> <a href="gradeReport?semesterId=<%=semesterId%>&courseId=${c.courseId}">${c.courseId}</a></li>
+                </c:forEach> 
+        </ul>
+
         <table>
             <tr>
                 <th>GRADE CATEGORY</th>
