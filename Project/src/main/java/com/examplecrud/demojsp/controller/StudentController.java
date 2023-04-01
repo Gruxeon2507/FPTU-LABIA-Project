@@ -107,4 +107,11 @@ public class StudentController {
         return "studentCurriculum";
 
     }
+    @RequestMapping(value="semester", method = RequestMethod.GET)
+    public String getSemester(ModelMap modelMap){
+        List<Curriculum> curriculums = curriculumReposity.getStudentCurriculumGrade("HE170907");
+        modelMap.addAttribute("curriculums",curriculums);
+        return "studentCurriculum";
+        
+    }
 }

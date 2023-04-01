@@ -18,7 +18,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface StudentRepository extends CrudRepository<Student, String> {
     //Select s FROM Student s join s.grade g join g.semester sem join g.gradeCategory gc join gc.course c   where s.studentId = 'HE170996' and sem.semesterId = 'SP2023' and c.courseId = 'PRJ301'
 
-    @Query("SELECT DISTINCT s FROM Student s \n"
+    @Query(value = "SELECT DISTINCT s FROM Student s \n"
             + "JOIN s.grade g \n"
             + "JOIN g.semester sek \n"
             + "JOIN g.gradeCategory gc \n"
@@ -42,4 +42,6 @@ public interface StudentRepository extends CrudRepository<Student, String> {
             + "where i.instructorId= ?1 and g.groupId = ?2 and gr.gradeCategoryId = ?3\n",nativeQuery = true)
     public List<Student> getStudentByInAndGroupAndGc(String instructorId,int groupId,int gradeCategoryId);
 
+    @Query(value = "SELECT * FROM Student s WHERE s.studentId= ?1", nativeQuery = true)
+    public Student getStudent(String studentId);
 }

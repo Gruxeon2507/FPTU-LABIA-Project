@@ -16,14 +16,14 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface CurriculumReposity extends CrudRepository<Curriculum, String> {
 
-    @Query(value = "Select * from curriculum cu\n"
-            + "inner join curriculum_course  cc on cc.curriculumId = cu.curriculumId\n"
-            + "inner join course co on co.courseId = cc.courseId\n"
-            + "inner join student s on s.curriculumId = cu.curriculumId\n"
-            + "left join `group` gr on gr.courseId = co.courseId\n"
-            + "left join gradecategory gc on gc.courseId = co.courseId\n"
-            + "left join grade g on g.gradeCategoryId = gc.gradeCategoryId and g.studentId = s.studentId\n"
-            + "left join semester sem on sem.semesterId = g.semesterId\n"
-            + "where s.studentId = ?1 ", nativeQuery = true)
+    @Query(value = "Select * from Curriculum cu\n"
+            + "inner join Curriculum_Course  cc on cc.curriculumId = cu.curriculumId\n"
+            + "inner join Course co on co.courseId = cc.courseId\n"
+            + "inner join Student s on s.curriculumId = cu.curriculumId\n"
+            + "left join `Group` gr on gr.courseId = co.courseId\n"
+            + "left join GradeCategory gc on gc.courseId = co.courseId\n"
+            + "left join Grade g on g.gradeCategoryId = gc.gradeCategoryId and g.studentId = s.studentId\n"
+            + "left join Semester sem on sem.semesterId = g.semesterId\n"
+            + "where s.studentId = ?1 ORDER BY sem.startDate ASC", nativeQuery = true)
     public List<Curriculum> getStudentCurriculumGrade(String studentId);
 }

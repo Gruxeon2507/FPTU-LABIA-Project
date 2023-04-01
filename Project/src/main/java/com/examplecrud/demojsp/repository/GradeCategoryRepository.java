@@ -4,17 +4,16 @@
  */
 package com.examplecrud.demojsp.repository;
 
-import com.examplecrud.demojsp.model.gradeModel.Semester;
-import java.sql.Date;
+import com.examplecrud.demojsp.model.gradeModel.GradeCategory;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-
 
 /**
  *
  * @author kmd
  */
-public interface SemesterRepository extends CrudRepository<Semester, String>{
-    @Query(value = "Select * from Semester s where ?1 between s.startDate and s.endDate",nativeQuery = true)
-    public Semester findByDate(Date currentDate);
+public interface GradeCategoryRepository extends CrudRepository<GradeCategory, Integer> {
+
+    @Query(value = "Select * FROM GradeCategory gc WHERE gc.gradeCategoryId = ?1", nativeQuery = true)
+    public GradeCategory getGradeCategory(String gradeCategoryId);
 }
