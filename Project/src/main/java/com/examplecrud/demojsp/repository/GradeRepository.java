@@ -25,4 +25,5 @@ public interface GradeRepository extends CrudRepository<Grade, GradeKey> {
             + "	inner join Semester sem on sem.semesterId=g.semesterId\n"
             + "	where s.studentId = ?1 and sem.semesterId= ?2 and c.courseId= ?3", nativeQuery = true)
     public List<Grade> getStudentGrade(String studentId, String semesterId, String courseId);
+
 }

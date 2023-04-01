@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemojspApplication {
         @RequestMapping("/")
         public String hello(Model model){
-            model.addAttribute("message","Hello World");
-            return "hello";
+            return "../authorization/login";
         }
 	public static void main(String[] args) {
 		SpringApplication.run(DemojspApplication.class, args);

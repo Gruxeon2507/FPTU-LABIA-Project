@@ -23,7 +23,7 @@ public class Grade {
     @EmbeddedId
     GradeKey id;
     
-    @Column
+    @Column()
     private float gradeValue;
     
     @ManyToOne
