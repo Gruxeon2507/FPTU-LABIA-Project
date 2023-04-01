@@ -10,34 +10,58 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Name = ${name} Age=${age}</h1>
+        <style>
+            h1 {
+
+text-align: center;
+
+}
+            table,th,tr {
+                height: 40px;
+                border: 1px solid;
+                border-collapse: collapse;
+                border-color: #cccccc;
+            }
+            table{
+                
+                width: 100%;
+            }
+            tr:nth-child(1) {
+                background-color: #6699ff;
+
+            }
+            
+            
+        </style>
+        <h1>Student ${sessionScope.account.student.studentName}(${sessionScope.account.student.studentId})   </h1>
+        
         <table>
             <tr>
                 <th>No</th>
                 <th>courseId</th>
                 <th>courseName</th>
-                <th>Semester</th>
                 <th>GroupName</th>
+                <th>Semester</th>
                 <th>StartDate</th>
                 <th>EndDate</th>
                 <th>Average Mark</th>
                 <th>Status</th>
-                <th></th>
+                
             </tr>
             <c:forEach items="${curriculums[0].curriculum_Courses}" var="cuc" varStatus="index">
                 <%--<c:forEach items="${cuc.course.group}" var="cuccg">--%>
                 <tr>
-                    <th>${index.index}</th>
-                    <th>${cuc.course.courseId}</th>
-                    <th>${cuc.course.courseName}</th>
-                    <th>${cuc.course.group[0].groupName}</th>
-                    <th>${cuc.course.gradeCategory[0].grade[0].semester.semesterName}</th>
-                    <th>
+                    <td>${index.index}</td>
+                    <td>${cuc.course.courseId}</td>
+                    <td>${cuc.course.courseName}</td>
+                    <td>${cuc.course.group[0].groupName}</td>
+                    <td>${cuc.course.gradeCategory[0].grade[0].semester.semesterName}</td>
+                    <td>
                         <fmt:formatDate value="${cuc.course.gradeCategory[0].grade[0].semester.startDate}" pattern="dd/MM/yyyy" />
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         <fmt:formatDate value="${cuc.course.gradeCategory[0].grade[0].semester.endDate}" pattern="dd/MM/yyyy" />
-                    </th>
+                    </td>
                     <c:set var="sum" value="${0}"/>
                     <c:set var="finalweight" value="${0}"/>
                     <c:set var="finalgrade" value="${0}"/>
@@ -68,22 +92,22 @@
 
                     <c:set var="sum" value="${sum div 100}" />
 
-                    <th>
+                    <td>
                         <fmt:formatNumber value="${sum}" pattern="#,##0.0" />
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                         <c:choose>
                             <c:when test="${sum >= 5 and finalgrade >= 4}">
-                                <p>Passed</p>
+                                <p style="color:DodgerBlue;">Passed</p>
                             </c:when>
                             <c:when test="${(sum < 5 and sum > 0) or (finalgrade < 4 and finalgrade > 0)}">
-                                <p>Not Passed<p>
+                                <p style="color:Tomato;">Not Passed<p>
                                 </c:when>
                                 <c:when test="${sum == 0}">
-                                <p>Not Started<p>
+                                <p style="color:MediumSeaGreen;">Not Started<p>
                                 </c:when>
                             </c:choose>
-                    </th>
+                    </td>
                 </tr>
                 <%--</c:forEach>--%> 
             </c:forEach> 

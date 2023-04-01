@@ -29,6 +29,25 @@
             </select>
             <button type="submit">Find</button>
         </form>
+             <table>
+                <tr>
+                    <th>No</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>GradeValue</th>
+                </tr>
+                <c:forEach items="${grades}" var="g" varStatus="index">
+                    <tr>
+                        <th>${index.index+1}</th>
+                        <th>${g.student.studentId}</th>
+                    <input type="hidden" name="studentId" value="${g.student.studentId}">
+                    <th>${g.student.studentName}</th>
+                    ${g.gradeValue}
+                    <th><input type="number" name="gradeValue" step="any" value="${g.gradeValue}"></th>
+                    </tr>
+                </c:forEach> 
+            </table>
+            <button type="submit">Submit Grade</button>
         <form method="post" action="insertGrade">
             <table>
                 <tr>
@@ -37,17 +56,14 @@
                     <th>Name</th>
                     <th>GradeValue</th>
                 </tr>
-                <c:forEach items="${students}" var="s" varStatus="index">
+                <c:forEach items="${grades}" var="g" varStatus="index">
                     <tr>
                         <th>${index.index+1}</th>
-                        <th>${s.studentId}</th>
-                    <input type="hidden" name="studentId" value="${s.studentId}">
-                    <th>${s.studentName}</th>
-                        <c:forEach items="${s.grade}" var="sg" varStatus="index">
-                            <c:if test="${sg.student.studentId eq s.studentId}">
-                            <th><input type="number" name="gradeValue" step="any" value="${s.grade[0].gradeValue}"></th>
-                            </c:if>
-                        </c:forEach> 
+                        <th>${g.student.studentId}</th>
+                    <input type="hidden" name="studentId" value="${g.student.studentId}">
+                    <th>${g.student.studentName}</th>
+                    ${g.gradeValue}
+                    <th><input type="number" name="gradeValue" step="any" value="${g.gradeValue}"></th>
                     </tr>
                 </c:forEach> 
             </table>

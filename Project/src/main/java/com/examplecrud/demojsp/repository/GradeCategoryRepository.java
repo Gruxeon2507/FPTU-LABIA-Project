@@ -5,6 +5,7 @@
 package com.examplecrud.demojsp.repository;
 
 import com.examplecrud.demojsp.model.gradeModel.GradeCategory;
+import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -16,4 +17,9 @@ public interface GradeCategoryRepository extends CrudRepository<GradeCategory, I
 
     @Query(value = "Select * FROM GradeCategory gc WHERE gc.gradeCategoryId = ?1", nativeQuery = true)
     public GradeCategory getGradeCategory(String gradeCategoryId);
+    
+    
+    @Query(value = "SELECT * FROM gradecategory gc\n"
+            + "where gc.gradeItemName != 'Total' and gc.courseId= ?1 ",nativeQuery = true)
+    public List<GradeCategory> getGradecateByCourseId(String courseId);
 }

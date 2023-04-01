@@ -27,5 +27,12 @@ public interface GradeRepository extends CrudRepository<Grade, GradeKey> {
             + "	where s.studentId = ?1 and sem.semesterId= ?2 and c.courseId= ?3", nativeQuery = true)
     public List<Grade> getStudentGrade(String studentId, String semesterId, String courseId);
 
-    
+    @Query(value = "select * from grade g\n"
+            + "right join student s on s.studentId = g.studentId\n"
+            + "inner join participate p on p.studentId = s.studentId\n"
+            + "inner join `group` gr on gr.groupId = p.groupId\n"
+            + "inner join instructor i on i.instructorId = gr.instructorId\n"
+            + "where i.instructorId='sonnt5' and gr.groupId = 15 and g.gradeCategoryId = 223 ", nativeQuery = true)
+    public List<Grade> getStudentGradeByInstructor(String instructorId, int groupId, int gradeCategoryId);
+
 }

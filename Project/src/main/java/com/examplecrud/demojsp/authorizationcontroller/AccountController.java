@@ -18,28 +18,33 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author Asus
  */
-
 @Controller
 public class AccountController {
-    
+
     @Autowired
     AccountRepository accountRepository;
-    
-      @RequestMapping(path="login", method = RequestMethod.GET)
-    public String showLoginForm(ModelMap modelMap){
+
+    @RequestMapping(path = "login", method = RequestMethod.GET)
+    public String showLoginForm(ModelMap modelMap) {
         return "../authorization/login";
     }
-    
-    @RequestMapping(path="login", method = RequestMethod.POST)
-    public String processLoginForm(@RequestParam("username") String username,@RequestParam("password") String password,ModelMap modelMap,HttpSession session){
+
+    @RequestMapping(path = "login", method = RequestMethod.POST)
+    public String processLoginForm(@RequestParam("username") String username, @RequestParam("password") String password, ModelMap modelMap, HttpSession session) {
         Account account = accountRepository.findByUsernameAndPassword(username, password);
-        if(account == null){
-            modelMap.addAttribute("errorLogin","Login Failed");
+        if (account == null) {
+            modelMap.addAttribute("errorLogin", "Login Failed");
             return "../authorization/login";
-        }else{
+        } else {
             session.setAttribute("account", account);
-            return "hello";
+            return "menu";
         }
     }
-    
+
+    @RequestMapping(path = "logout", method = RequestMethod.GET)
+    public String processLogout(ModelMap modelMap,HttpSession session) {
+        session.removeAttribute("account");
+        return "../authorization/login";
+    }
+
 }

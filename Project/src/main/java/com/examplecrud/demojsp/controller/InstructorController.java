@@ -4,20 +4,24 @@
  */
 package com.examplecrud.demojsp.controller;
 
+import com.examplecrud.demojsp.model.authorizationModel.Account;
 import com.examplecrud.demojsp.model.gradeModel.Grade;
 import com.examplecrud.demojsp.model.gradeModel.GradeCategory;
+import com.examplecrud.demojsp.model.gradeModel.Group;
 import com.examplecrud.demojsp.model.gradeModel.Instructor;
 import com.examplecrud.demojsp.model.gradeModel.Semester;
 import com.examplecrud.demojsp.model.gradeModel.Student;
 import com.examplecrud.demojsp.modelkey.GradeKey;
 import com.examplecrud.demojsp.repository.GradeCategoryRepository;
 import com.examplecrud.demojsp.repository.GradeRepository;
+import com.examplecrud.demojsp.repository.GroupRepository;
 import com.examplecrud.demojsp.repository.InstructorRepository;
 import com.examplecrud.demojsp.repository.SemesterRepository;
 import com.examplecrud.demojsp.repository.StudentRepository;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -42,8 +46,7 @@ public class InstructorController {
     @Autowired
     StudentRepository studentRepository;
 
-    @Autowired
-    GradeCategoryReposity gradeCategoryReposity;
+ 
 
     @Autowired
     SemesterRepository semesterRepository;
@@ -51,7 +54,7 @@ public class InstructorController {
     GradeRepository gradeRepository;
     @Autowired
     GradeCategoryRepository gradeCategoryRepository;
-    
+
     @RequestMapping(path = "list", method = RequestMethod.GET)
     public String getAllInStructor(ModelMap modelMap) {
         Iterable<Instructor> instructors = instructorRepository.findAll();
@@ -61,9 +64,9 @@ public class InstructorController {
 
     @RequestMapping(path = "insertGrade", method = RequestMethod.GET)
     public String viewInsertGrade(@RequestParam(value = "groupId", required = false) String groupId,
-             @RequestParam(value = "courseId", required = false) String courseId,
-             @RequestParam(value = "gradeCategoryId", required = false) String gradeCategoryId,
-             ModelMap modelMap, HttpSession session) {
+            @RequestParam(value = "courseId", required = false) String courseId,
+            @RequestParam(value = "gradeCategoryId", required = false) String gradeCategoryId,
+            ModelMap modelMap, HttpSession session) {
         Account account = (Account) session.getAttribute("account");
         List<Group> groups = groupRepository.findByInstructorId(account.getInstructor().getInstructorId());
         if (groupId == null) {
@@ -73,31 +76,35 @@ public class InstructorController {
         if (courseId == null) {
             courseId = groups.get(0).getCourse().getCourseId();
         }
-        List<GradeCategory> gradeCategorys = gradeCategoryReposity.getGradecateByCourseId(courseId);
+        List<GradeCategory> gradeCategorys = gradeCategoryRepository.getGradecateByCourseId(courseId);
         if (gradeCategoryId == null) {
-            gradeCategoryId =gradeCategorys.get(0).getGradeCategoryId()+"";
+            gradeCategoryId = gradeCategorys.get(1).getGradeCategoryId() + "";
         }
         List<Student> students = studentRepository.getStudentByInAndGroupAndGc(account.getInstructor().getInstructorId(),
                 Integer.parseInt(groupId),
                 Integer.parseInt(gradeCategoryId));
+        List<Grade> grades = gradeRepository.getStudentGradeByInstructor(account.getInstructor().getInstructorId(),
+                Integer.parseInt(groupId),
+                Integer.parseInt(gradeCategoryId));
         modelMap.addAttribute("gradeCategorys", gradeCategorys);
         modelMap.addAttribute("groups", groups);
+        modelMap.addAttribute("grades",grades);
         modelMap.addAttribute("students", students);
         return "insertGrade";
-    
-    @RequestMapping(path = "grade", method = RequestMethod.POST)
+    }
+
+    @RequestMapping(path = "insertGrade", method = RequestMethod.POST)
     public String getInstructorGroup(@RequestParam("studentId") List<String> studentId,
             @RequestParam("gradeValue") List<String> gradeValue,
             @RequestParam("gradeCategoryId") String gradeCategoryId,
-            @RequestParam
-            ModelMap modelMap) {
+            @RequestParam ModelMap modelMap) {
 
         Date date = Date.valueOf(LocalDate.now());
         Semester semester = semesterRepository.findByDate(date);
         for (int i = 0; i < studentId.size(); i++) {
             Grade grade = new Grade();
             GradeCategory gc = gradeCategoryRepository.getGradeCategory(gradeCategoryId);
-            Student s =  studentRepository.getStudent(studentId.get(i));
+            Student s = studentRepository.getStudent(studentId.get(i));
             gc.setGradeCategoryId(Integer.parseInt(gradeCategoryId));
             s.setStudentId(studentId.get(i));
             grade.setGradeValue(Float.parseFloat(gradeValue.get(i)));
@@ -106,6 +113,6 @@ public class InstructorController {
             grade.setSemester(semester);
             gradeRepository.save(grade);
         }
-        return"gradeList";
+        return "insertGrade";
     }
 }
